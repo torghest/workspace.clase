@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EjAndroid1</string>
+    <string name="action_settings">Settings</string>
+    <!-- Textos Layout -->
+    <string name="inNum">Introduzca un Número:</string>
+    <string name="resultado">Número + 5:</string>
+    <string name="btn_enviar">Calcular Resultado</string>
+
+</resources>

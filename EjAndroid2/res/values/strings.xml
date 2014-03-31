@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">EjAndroid2</string>
+    <string name="action_settings">Settings</string>
+    <!-- Textos Labels -->
+    <string name="lblNombre">Nombre:</string>
+    <string name="lblApellido">Apellido:</string>
+    <string name="lblEdad">Edad:</string>
+
+</resources>
