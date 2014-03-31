@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://WSPackage/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://WSPackage/">
+
+<xs:element name="convertirAdivisa" type="tns:convertirAdivisa" />
+
+<xs:element name="convertirAdivisaResponse" type="tns:convertirAdivisaResponse" />
+
+<xs:element name="convertirAeuro" type="tns:convertirAeuro" />
+
+<xs:element name="convertirAeuroResponse" type="tns:convertirAeuroResponse" />
+
+<xs:complexType name="convertirAeuro">
+<xs:sequence>
+<xs:element name="valor" type="xs:double" />
+<xs:element name="indice" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="convertirAeuroResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="convertirAdivisa">
+<xs:sequence>
+<xs:element name="valor" type="xs:double" />
+<xs:element name="indice" type="xs:int" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="convertirAdivisaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:double" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <managed-bean>
+        <managed-bean-name>LoginBean</managed-bean-name>
+        <managed-bean-class>pqManagedBean.LoginBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>correcto</from-outcome>
+            <to-view-id>/UsuarioCorrecto.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>incorrecto</from-outcome>
+            <to-view-id>/SinAcceso.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/SinAcceso.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>volver</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

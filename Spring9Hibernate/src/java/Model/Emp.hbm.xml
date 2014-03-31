@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 27-mar-2014 13:26:22 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="Model.Emp" table="EMP" schema="SYSTEM">
+        <id name="empNo" type="short">
+            <column name="EMP_NO" precision="4" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="apellido" type="string">
+            <column name="APELLIDO" length="10" />
+        </property>
+        <property name="oficio" type="string">
+            <column name="OFICIO" length="12" />
+        </property>
+        <property name="dir" type="java.lang.Short">
+            <column name="DIR" precision="4" scale="0" />
+        </property>
+        <property name="fechaAlt" type="date">
+            <column name="FECHA_ALT" length="7" />
+        </property>
+        <property name="salario" type="java.lang.Long">
+            <column name="SALARIO" precision="10" scale="0" />
+        </property>
+        <property name="comision" type="java.lang.Long">
+            <column name="COMISION" precision="10" scale="0" />
+        </property>
+        <property name="deptNo" type="java.lang.Byte">
+            <column name="DEPT_NO" precision="2" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>

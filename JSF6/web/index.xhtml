@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Validacion Campos Formulario</title>
+    </h:head>
+    <h:body>
+        <h:form id="form1">
+            <h:commandButton value="Validar Datos" action="validar"/>
+            <h:panelGrid columns="1" border="2">
+                <h:outputLabel value="Información de Acceso:" style="background-color: #9999DD;"/>
+                <h:panelGrid columns="3">
+                    
+                    <h:outputLabel value="E-Mail:" for="txtEmail"/>
+                    <h:inputText id="txtEmail" value="#{MB.txtEmail}"
+                            validatorMessage="E-Mail incorrecto"
+                            required="true">
+                        <f:validateRegex pattern="[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,4}"/>
+                    </h:inputText>
+                    <h:message for="txtEmail" errorStyle="color: red" infoStyle="color: green"/>
+                    
+                    <h:outputLabel value="Password:" for="txtPass"/>
+                    <h:inputSecret id="txtPass" value="#{MB.txtPass}"
+                            validatorMessage="La contraseña debe tener como minimo 5 caracteres"
+                            required="true">
+                        <f:validateLength minimum="5"/>
+                    </h:inputSecret>
+                    <h:message for="txtPass" errorStyle="color: red" infoStyle="color: green"/>
+                    
+                    <h:outputLabel value="Confirmar Password:" for="txtconfpass"/>
+                    <h:inputSecret id="txtconfpass" value="#{MB.txtconfpass}"
+                            validator="#{MB.validarPass}" required="true"/>
+                    <h:message for="txtconfpass" errorStyle="color: red" infoStyle="color: green"/>
+                    
+                </h:panelGrid>
+                <h:outputLabel value="Información Personal:" style="background-color: #9999DD"/>
+                <h:panelGrid columns="3">
+                    
+                    <h:outputLabel value="Nombre:" for="txtNombre"/>
+                    <h:inputText id="txtNombre" value="#{MB.txtNombre}"
+                            validatorMessage="El nombre solo puede contener letras"
+                            required="true">
+                        <f:validateRegex pattern="[A-Za-z]{1,}"/>
+                    </h:inputText>
+                    <h:message for="txtNombre" errorStyle="color: red" infoStyle="color: green"/>
+                    
+                    <h:outputLabel value="Apellidos:" for="txtApellidos"/>
+                    <h:inputText id="txtApellidos" value="#{MB.txtApellidos}"
+                            validatorMessage="Los apellidos solo puede contener letras"
+                            required="true">
+                        <f:validateRegex pattern="[A-Za-z]{1,}"/>
+                    </h:inputText>
+                    <h:message for="txtApellidos" errorStyle="color: red" infoStyle="color: green"/>
+                    
+                    <h:outputLabel value="Dirección:" for="txtDireccion"/>
+                    <h:inputText id="txtDireccion" value="#{MB.txtDireccion}"
+                            required="true"/>
+                    <h:message for="txtDireccion" errorStyle="color: red" infoStyle="color: green"/>
+                    
+                    <h:outputLabel value="Ciudad:" for="txtCiudad"/>
+                    <h:inputText id="txtCiudad" value="#{MB.txtCiudad}"
+                            validatorMessage="La ciudad solo puede contener letras"
+                            required="true">
+                        <f:validateRegex pattern="[A-Za-z]{1,}"/>
+                    </h:inputText>
+                    <h:message for="txtCiudad" errorStyle="color: red" infoStyle="color: green"/>
+                    
+                    <h:outputLabel value="Código Postal:" for="txtCp"/>
+                    <h:inputText id="txtCp" value="#{MB.txtCp}"
+                            validatorMessage="El código postal debe tener 5 digitos"
+                            required="true">
+                        <f:validateLength minimum="5" maximum="5"/>
+                    </h:inputText>
+                    <h:message for="txtCp" errorStyle="color: red" infoStyle="color: green"/>
+                    
+                    <h:outputLabel value="Teléfono:" for="txtTlf"/>
+                    <h:inputText id="txtTlf" value="#{MB.txtTlf}"
+                            validatorMessage="El teléfono debe tener 9 digitos"
+                            required="true">
+                        <f:validateLength minimum="9" maximum="9"/>
+                    </h:inputText>
+                    <h:message for="txtTlf" errorStyle="color: red" infoStyle="color: green"/>
+                    
+                </h:panelGrid>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2-hudson-740-. --><xs:schema xmlns:tns="http://ServiciosWeb/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ServiciosWeb/">
+
+<xs:element name="Nombre" type="tns:Nombre" />
+
+<xs:element name="NombreResponse" type="tns:NombreResponse" />
+
+<xs:complexType name="Nombre">
+<xs:sequence />
+</xs:complexType>
+
+<xs:complexType name="NombreResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

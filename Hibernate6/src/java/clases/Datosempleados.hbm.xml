@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 25-mar-2014 9:05:28 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="clases.Datosempleados" table="DATOSEMPLEADOS" schema="SYSTEM">
+        <composite-id name="id" class="clases.DatosempleadosId">
+            <key-property name="apellido" type="string">
+                <column name="APELLIDO" length="10" />
+            </key-property>
+            <key-property name="salarioanual" type="big_decimal">
+                <column name="SALARIOANUAL" precision="22" scale="0" />
+            </key-property>
+            <key-property name="salario" type="java.lang.Long">
+                <column name="SALARIO" precision="10" scale="0" />
+            </key-property>
+            <key-property name="oficio" type="string">
+                <column name="OFICIO" length="12" />
+            </key-property>
+            <key-property name="fechaalta" type="string">
+                <column name="FECHAALTA" length="54" />
+            </key-property>
+            <key-property name="departamento" type="string">
+                <column name="DEPARTAMENTO" length="14" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Titulo Pagina JSF4</title>
+        <link rel="stylesheet" href="newcss.css"/>
+    </h:head>
+    <h:body>
+        <h1>Ejemplo envío parámetros JSF</h1>
+        <h:form id="form1">
+            <table border="1">
+                <tr>
+                    <td>Introduzca un numero:</td>
+                    <td><h:outputText id="txtnumero" binding="#{MB.txtNumero}"/></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h:commandButton id="btntabla" value="Tabla Multiplicar" action="#{MB.btnEnviar_Click}">
+                            <f:param name="accion" value="tabla"/>
+                        </h:commandButton>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h:commandLink id="lnkcollatz" value="Collatz" action="#{MB.btnEnviar_Click}">
+                            <f:param name="accion" value="collatz"/>
+                        </h:commandLink>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h:outputLabel id="lblresultado" binding="#{MB.lblResultado}"/>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <br/>
+        </h:form>
+    </h:body>
+</html>
+
+
