@@ -1,10 +1,12 @@
 package com.example.propuestoandroid1;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
@@ -28,12 +30,20 @@ public class MainActivity extends Activity {
 		// Rellenar el Combo
 		String[] opciones = getResources().getStringArray(R.array.datCurso);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-				this, R.id.spCurso, opciones);
+				this, android.R.layout.simple_spinner_item, opciones);
 		spCurso.setAdapter(adapter);
 	}
 	
 	public void enviar(View view){
 		String curso = spCurso.getSelectedItem().toString();
+		Intent i = new Intent(this, Ventana2Activity.class);
+		// Cargar parametros
+		i.putExtra("curso", curso);
+		i.putExtra("nombre", edNombre.getText().toString());
+		i.putExtra("apellido", edApellido.getText().toString());
+		i.putExtra("telefono", edTelefono.getText().toString());
+		i.putExtra("horario", ((RadioButton)findViewById(rdHorario.getCheckedRadioButtonId())).getText().toString());
+		// Lanzar Ventana2
+		startActivity(i);
 	}
-	
 }
