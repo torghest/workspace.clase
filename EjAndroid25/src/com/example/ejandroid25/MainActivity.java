@@ -55,7 +55,7 @@ public class MainActivity extends Activity {
 			//Creacion del transporte
 			HttpTransportSE transporte = new HttpTransportSE(URL);
 			
-			// Paso de parámetro
+			// Paso de parámetro (tantos PropertyInfo como parametros)
 			PropertyInfo Nombre = new PropertyInfo();
 			Nombre.setName("dato");
 			Nombre.setValue(et1.getText().toString());
