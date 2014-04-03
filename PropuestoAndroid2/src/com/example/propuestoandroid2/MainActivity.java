@@ -11,12 +11,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MainActivity extends Activity {
 	
 	private SQLiteDatabase db;
 	private Spinner spNombre;
 	private EditText etCodigo;
+	private TextView tvBD;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +26,10 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 		spNombre = (Spinner)findViewById(R.id.spNombre);
 		etCodigo = (EditText)findViewById(R.id.etCodigo);
+		tvBD = (TextView)findViewById(R.id.tvBD);
 		BaseDatosHelper sqloh = new BaseDatosHelper(this,"DBUsuarios",null,1);
 		db = sqloh.getReadableDatabase();
-		System.out.println(db);
+		tvBD.setText(db.toString());
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				this,android.R.layout.simple_spinner_item, cargarCombo());
 		spNombre.setAdapter(adapter);

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import core.BaseDatosHelper;
 
 public class MainActivity extends Activity {
@@ -17,6 +18,7 @@ public class MainActivity extends Activity {
 	private RadioButton rElim;
 	private RadioButton rModi;
 	private RadioGroup rAccion;
+	private TextView tvBD;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,10 @@ public class MainActivity extends Activity {
         rElim=(RadioButton)findViewById(R.id.rdEliminar);
         rModi=(RadioButton)findViewById(R.id.rdModificar);
         rAccion=(RadioGroup)findViewById(R.id.rgAccion);
+        tvBD = (TextView)findViewById(R.id.tvBD);
+        BaseDatosHelper usdbh = new BaseDatosHelper(this, "DBUsuarios", null, 1);
+		SQLiteDatabase db = usdbh.getReadableDatabase();
+		tvBD.setText(db.toString());
 	}
 	
 	public void crearBd(View view) {  
