@@ -25,7 +25,7 @@ public class AltaActivity extends Activity {
 	} 
 		
 	public void Alta(View view) {  
-		BaseDatosHelper usdbh = new BaseDatosHelper(this, "DBUsuarios", null, 1);
+		BaseDatosHelper usdbh = new BaseDatosHelper(this, this.getResources().getString(R.string.dataBase), null, 1);
 		//Abrimos la base de datos 'DBUsuarios' en modo escritura         
 		db= usdbh.getWritableDatabase();          
 

@@ -1,5 +1,11 @@
 package com.example.ejandroid24;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -30,14 +36,40 @@ public class MainActivity extends Activity {
         rModi=(RadioButton)findViewById(R.id.rdModificar);
         rAccion=(RadioGroup)findViewById(R.id.rgAccion);
         tvBD = (TextView)findViewById(R.id.tvBD);
-        BaseDatosHelper usdbh = new BaseDatosHelper(this, "DBUsuarios", null, 1);
-		SQLiteDatabase db = usdbh.getReadableDatabase();
-		tvBD.setText(db.toString());
+        BaseDatosHelper usdbh = new BaseDatosHelper(this, "../../databases/DBUsuarios", null, 1);
+        db = usdbh.getReadableDatabase();
+		tvBD.setText("#DBpath: "+db.getPath()+"#PkgCodePath"+this.getPackageCodePath()+"#PkgResPath"+this.getPackageResourcePath());
 	}
 	
+	private void copyDataBase() throws IOException{
+		String DB_PATH = "/data/data/databases/";
+		String DB_NAME = "DBUsuarios";
+		//Abrimos el fichero de base de datos como entrada
+		InputStream myInput = db;
+		 
+		//Ruta a la base de datos vacía recién creada
+		String outFileName = DB_PATH + DB_NAME;
+		 
+		//Abrimos la base de datos vacía como salida
+		OutputStream myOutput = new FileOutputStream(outFileName);
+		 
+		//Transferimos los bytes desde el fichero de entrada al de salida
+		byte[] buffer = new byte[1024];
+		int length;
+		while ((length = myInput.read(buffer))>0){
+		myOutput.write(buffer, 0, length);
+		}
+		 
+		//Liberamos los streams
+		myOutput.flush();
+		myOutput.close();
+		myInput.close();
+		 
+		}
+	
 	public void crearBd(View view) {  
-		BaseDatosHelper usdbh = new BaseDatosHelper(this, "DBUsuarios", null, 1);
-//		Abrimos la base de datos 'DBUsuarios' en modo escritura         
+		BaseDatosHelper usdbh = new BaseDatosHelper(this, this.getResources().getString(R.string.dataBase), null, 1);
+//		Abrimos la base de datos 'this.getResources().getString(R.string.dataBase)' en modo escritura         
 		db= usdbh.getWritableDatabase();          
 //		Si hemos abierto correctamente la base de datos         
 		if(db != null){            

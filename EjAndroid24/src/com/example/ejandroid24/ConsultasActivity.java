@@ -29,7 +29,7 @@ public class ConsultasActivity extends Activity {
 			String[] args = new String[] {nombre.getText().toString()}; 
 			String codigo="";
 			String nombre="";
-			BaseDatosHelper usdbh = new BaseDatosHelper(this, "DBUsuarios", null, 1);
+			BaseDatosHelper usdbh = new BaseDatosHelper(this, this.getResources().getString(R.string.dataBase), null, 1);
 
 			SQLiteDatabase db = usdbh.getReadableDatabase(); 
 			Cursor c = db.rawQuery("SELECT codigo,nombre FROM Usuarios where nombre=?",args); 

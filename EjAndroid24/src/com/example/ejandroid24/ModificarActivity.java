@@ -26,7 +26,7 @@ public class ModificarActivity extends Activity {
 		
 	public void ModificarBD(View view) { 
 		try {
-			BaseDatosHelper usdbh = new BaseDatosHelper(this, "DBUsuarios", null, 1);
+			BaseDatosHelper usdbh = new BaseDatosHelper(this, this.getResources().getString(R.string.dataBase), null, 1);
 			//Abrimos la base de datos 'DBUsuarios' en modo escritura         
 			db= usdbh.getWritableDatabase();          
 			

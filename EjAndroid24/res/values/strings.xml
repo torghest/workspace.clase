@@ -8,5 +8,6 @@
     <string name="title_activity_eliminar">Eliminar</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_modificar">Modificar</string>
+    <string name="dataBase">../../databases/DBUsuarios</string>
 
 </resources>

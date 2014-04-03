@@ -27,9 +27,9 @@ public class MainActivity extends Activity {
 		spNombre = (Spinner)findViewById(R.id.spNombre);
 		etCodigo = (EditText)findViewById(R.id.etCodigo);
 		tvBD = (TextView)findViewById(R.id.tvBD);
-		BaseDatosHelper sqloh = new BaseDatosHelper(this,"DBUsuarios",null,1);
+		BaseDatosHelper sqloh = new BaseDatosHelper(this,this.getResources().getString(R.string.dataBase),null,1);
 		db = sqloh.getReadableDatabase();
-		tvBD.setText(db.toString());
+		tvBD.setText("#DBpath: "+db.getPath()+"#PkgCodePath"+this.getPackageCodePath()+"#PkgResPath"+this.getPackageResourcePath());
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 				this,android.R.layout.simple_spinner_item, cargarCombo());
 		spNombre.setAdapter(adapter);
