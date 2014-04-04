@@ -1,19 +1,26 @@
+<%@page import="jdbc.AccesoJDBC"%>
+<%@page import="Util.properties"%>
+<%@page import="Util.Navegacion"%>
 <%
-    String[] optMenu = {"Inicio","opcion1","opcion2","opcion3"};
-    String colorBase = "#0066AA";
-    String colorSel = "#6699DD";
+    AccesoJDBC jdbc = new AccesoJDBC();
+    String[] optMenu = jdbc.getMenu();
+    String colorBase = properties.FONDO_MENU2;
+    String colorSel = properties.FONDO_MENU1;
     String aux = request.getParameter("opt");
-    int sel = (aux==null)?0:Integer.valueOf(aux);
+    String sel = (aux==null)?"1":aux;
+    String[] varForm = {"opt"};
+    Navegacion nav = new Navegacion("menu",varForm);
 %>
     <ul align="left" style="list-style: none; cursor: default">
-        <%
-        for (int i = 0; i < optMenu.length; i++){
-        %>
-            <li style="background-color: <%=(sel==i)?colorSel:colorBase%>; padding: 0px 5px"<%=(sel!=i)?" onclick=\"javascript:menu.opt.value="+i+";menu.submit();\"":""%>><%=optMenu[i]%></li>
-        <%
+<%
+        for (String s : optMenu){
+            String[] spl = s.split(AccesoJDBC.separador2);
+            String[] val = {String.valueOf(spl[1])};
+            nav.setVal(val);
+%>
+<li style="background-color: <%=(sel.equals(spl[1]))?colorSel:colorBase%>; padding: 0px 5px;"<%=(!sel.equals(spl[1]))?nav.onClick():""%>><%=spl[0]%></li>
+<%
         }
-        %>
+%>
     </ul>
-    <form name="menu" action="index.jsp" method="post">
-        <input type="hidden" name="opt">
-    </form>
+    <%=nav.form()%>
