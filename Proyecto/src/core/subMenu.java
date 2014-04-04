@@ -28,10 +28,11 @@ public class subMenu {
     private Navegacion nav;
     private String selected;
     private String selPadre;
+    private String jspf;
 
     public subMenu() {
         this.jdbc = new AccesoJDBC();
-        this.optMenu = this.getSubMenu(jdbc.getConnection());
+        this.optMenu = this.getSubMenu();
         this.colorBase = properties.FONDO_MENU2;
         this.colorSel = properties.FONDO_MENU1;
         this.varForm = new String[2];
@@ -80,10 +81,16 @@ public class subMenu {
 
     public void setSelPadre(String selPadre) {
         this.selPadre = selPadre;
-        optMenu = getSubMenu(jdbc.getConnection());
+        optMenu = getSubMenu();
     }
     
-    private String[] getSubMenu(Connection con){
+    public String getJspf(){
+        this.jspf = cargarJspf();
+        return this.jspf;
+    }
+    
+    private String[] getSubMenu(){
+        Connection con = this.jdbc.getConnection();
         String[] res = null;
         if (this.selPadre != null){
             try {
@@ -97,6 +104,26 @@ public class subMenu {
                 if (!aux.equals("")){
                     aux = aux.substring(AccesoJDBC.separador1.length());
                     res = aux.split(AccesoJDBC.separador1);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return res;
+    }
+    
+    private String cargarJspf(){
+        Connection con = this.jdbc.getConnection();
+        String res = "";
+        String auxId = (this.selected==null)?"1":this.selected;
+        if (this.selPadre != null){
+            try {
+                PreparedStatement ps = con.prepareStatement("SELECT pagina FROM submenu WHERE id_padre = ? AND id = ? ORDER BY id");
+                ps.setInt(1, Integer.valueOf(this.selPadre));
+                ps.setInt(2, Integer.valueOf(auxId));
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()){
+                    res = rs.getString("pagina");
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();
