@@ -1,11 +1,13 @@
-<%@include file="variablesMenu.jspf" %>
+<jsp:useBean id="menu" scope="request" class="core.menu"/>
+<jsp:setProperty name="menu" property="selected" param="menu"/>
 <ul align="left" style="list-style: none; cursor: default">
 <%
-        for (String s : menu.getOptMenu()){ 
+        for (String s : menu.getOptMenu()){
             String[] spl = s.split(AccesoJDBC.separador2);
             String[] val = {String.valueOf(spl[1])};
             menu.getNav().setVal(val);
             String sel = menu.getSelected();
+            sel = (sel==null)?"1":sel;
             String color = (spl[1].equals(sel))?menu.getColorSel():menu.getColorBase();
             String click = (!spl[1].equals(sel))?menu.getNav().onClick():"";
 %>

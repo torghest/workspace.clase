@@ -19,22 +19,25 @@ import jdbc.AccesoJDBC;
  *
  * @author alumno
  */
-public class menu {
+public class subMenu {
+    private AccesoJDBC jdbc;
     private String[] optMenu;
     private String colorBase;
     private String colorSel;
     private String[] varForm;
     private Navegacion nav;
     private String selected;
+    private String selPadre;
 
-    public menu() {
-        AccesoJDBC jdbc = new AccesoJDBC();
-        this.optMenu = this.getMenu(jdbc.getConnection());
+    public subMenu() {
+        this.jdbc = new AccesoJDBC();
+        this.optMenu = this.getSubMenu(jdbc.getConnection());
         this.colorBase = properties.FONDO_MENU2;
         this.colorSel = properties.FONDO_MENU1;
-        this.varForm = new String[1];
+        this.varForm = new String[2];
         this.varForm[0] = "menu";
-        this.nav = new Navegacion("menu",varForm);
+        this.varForm[1] = "submenu";
+        this.nav = new Navegacion("submenu",varForm);
     }
 
     public String[] getOptMenu() {
@@ -67,25 +70,38 @@ public class menu {
 
     public void setSelected(String selected) {
         this.selected = selected;
-        String[] aux = {this.selected};
+        String[] aux = {this.selPadre,this.selected};
         this.nav.setVal(aux);
     }
     
-    private String[] getMenu(Connection con){
+    public String getSelPadre() {
+        return selPadre;
+    }
+
+    public void setSelPadre(String selPadre) {
+        this.selPadre = selPadre;
+        optMenu = getSubMenu(jdbc.getConnection());
+    }
+    
+    private String[] getSubMenu(Connection con){
         String[] res = null;
-        try {
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT nombre,id FROM menu ORDER BY id");
-            String aux = "";
-            while (rs.next()){
-                aux += AccesoJDBC.separador1 + rs.getString("nombre") + AccesoJDBC.separador2 + rs.getString("id");
+        if (this.selPadre != null){
+            try {
+                PreparedStatement ps = con.prepareStatement("SELECT nombre,id FROM submenu WHERE id_padre = ? ORDER BY id");
+                ps.setInt(1, Integer.valueOf(this.selPadre));
+                ResultSet rs = ps.executeQuery();
+                String aux = "";
+                while (rs.next()){
+                    aux += AccesoJDBC.separador1 + rs.getString("nombre") + AccesoJDBC.separador2 + rs.getString("id");
+                }
+                if (!aux.equals("")){
+                    aux = aux.substring(AccesoJDBC.separador1.length());
+                    res = aux.split(AccesoJDBC.separador1);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
-            aux = aux.substring(AccesoJDBC.separador1.length());
-            res = aux.split(AccesoJDBC.separador1);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
         }
         return res;
     }
-    
 }

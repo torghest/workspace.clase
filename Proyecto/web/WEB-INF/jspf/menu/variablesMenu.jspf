@@ -1,2 +1,0 @@
-<jsp:useBean id="menu" scope="request" class="core.menu"/>
-<jsp:setProperty name="menu" property="selected" param="opt"/>
