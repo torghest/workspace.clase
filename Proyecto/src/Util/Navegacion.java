@@ -45,9 +45,9 @@ public class Navegacion {
     }
     
     public String form(){
-        String aux = "<form name=\"" + this.form + "\" action=\"\" method=\"post\">";
-        for (String var1 : var){
-            aux += "<input type=\"hidden\" name=\"" + var1 + "\"/>";
+        String aux = "<form name=\"" + this.form + "\" action=\"\" method=\"get\">";
+        for (int i = 0; i < var.length; i++){
+            aux += "<input type=\"hidden\" name=\"" + this.var[i] + "\"" + (this.val!=null?" value=\"" + this.val[i] + "\"":"") + "/>";
         }
         aux += "</form>";
         return aux;

@@ -1,20 +1,3 @@
-<div style="position: absolute; top: 3px; right: 19px;">
-    <ul align="left" style="cursor: default;">
-<%
-        nav.setForm("menu2");
-        for (String s : optMenu){ 
-            String[] spl = s.split(AccesoJDBC.separador2);
-            String[] val = {String.valueOf(spl[1])};
-            nav.setVal(val);
-%>
-            <li style="display: inline; background-color: <%=(sel.equals(spl[1]))?colorSel:colorBase%>; padding: 0px 5px;"<%=(!sel.equals(spl[1]))?nav.onClick():""%>><%=spl[0]%></li>
-<%
-        }
-%>
-    </ul>
-    <%=nav.form()%>
-</div>
-
 <p>
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 </p>

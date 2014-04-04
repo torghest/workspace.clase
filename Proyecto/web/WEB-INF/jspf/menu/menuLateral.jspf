@@ -1,0 +1,17 @@
+<%@include file="variablesMenu.jspf" %>
+<ul align="left" style="list-style: none; cursor: default">
+<%
+        for (String s : menu.getOptMenu()){ 
+            String[] spl = s.split(AccesoJDBC.separador2);
+            String[] val = {String.valueOf(spl[1])};
+            menu.getNav().setVal(val);
+            String sel = menu.getSelected();
+            String color = (spl[1].equals(sel))?menu.getColorSel():menu.getColorBase();
+            String click = (!spl[1].equals(sel))?menu.getNav().onClick():"";
+%>
+    <li style="background-color: <%=color%>; padding: 0px 5px;"<%=click%>><%=spl[0]%></li>
+<%
+        }
+%>
+</ul>
+<%=menu.getNav().form()%>

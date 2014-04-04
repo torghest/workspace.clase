@@ -50,22 +50,4 @@ public class AccesoJDBC {
         return this.con;
     }
     
-    public String[] getMenu(){
-        this.con = getConnection();
-        String[] res = null;
-        try {
-            Statement stmt = this.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT nombre,id FROM menu ORDER BY id");
-            String aux = "";
-            while (rs.next()){
-                aux += this.separador1 + rs.getString("nombre") + this.separador2 + rs.getString("id");
-            }
-            aux = aux.substring(this.separador1.length());
-            res = aux.split(this.separador1);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return res;
-    }
-    
 }
