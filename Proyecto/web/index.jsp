@@ -32,6 +32,10 @@
                     %>
                         <%@include file="WEB-INF/jspf/fragmento.jspf" %>
                     <%
+                    } else if (paramBD[0].equals("clasificacion")){
+                    %>
+                        <%@include file="WEB-INF/jspf/acciones/clasificacion.jspf" %>
+                    <%
                     } else if (paramBD[0].equals("proximamente")){
                     %>
                         <%@include file="WEB-INF/jspf/proximamente.jspf" %>

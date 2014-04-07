@@ -1,0 +1,31 @@
+<%@page import="java.sql.ResultSetMetaData"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="jdbc.AccesoJDBC"%>
+<%
+    String res = "";
+    try {
+        Statement stmt = AccesoJDBC.getInstancia().getConexion().createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT cat.nombre as Categoria, e.nombre as Nombre, c.puntos as Puntos, c.partidas_jugadas as Jugadas, c.partidas_ganadas as Ganadas, c.juegos_ganados as 'Juegos Ganados' FROM clasificacion as c join equipo as e on c.id_equipo = e.id join categoria as cat on e.id_categoria = cat.id order by e.id_categoria, c.puntos desc, c.juegos_ganados desc");
+        res = "<table border=\"1\">";
+        ResultSetMetaData rsmd = rs.getMetaData();
+        res += "<tr>";
+        for (int i = 1; i <= rsmd.getColumnCount(); i++){
+            res += "<td bgcolor=\"#333333\"><font color=\"#DDDDDD\">"+rsmd.getColumnLabel(i)+"</td>";
+        }
+        res += "</tr>";
+        while (rs.next()){
+            res += "<tr>";
+            for (int i = 1; i <= rsmd.getColumnCount(); i++){
+                String d = rs.getString(i);
+                res += "<td>"+((d == null)?"0":d)+"</td>";
+            }
+            res += "</tr>";
+        }
+        res += "</table>";
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+    }
+%>
+<%=res%>
