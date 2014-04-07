@@ -45,11 +45,12 @@ public class Navegacion {
     }
     
     public String form(){
-        String aux = "<form name=\"" + this.form + "\" action=\"\" method=\"post\">";
+//        String aux = "<form name=\"" + this.form + "\" action=\"\" method=\"post\">";
+        String aux = "";
         for (int i = 0; i < var.length; i++){
-            aux += "<input type=\"hidden\" name=\"" + this.var[i] + "\"" + (this.val!=null?" value=\"" + this.val[i] + "\"":"") + "/>";
+            aux += "<input type=\"hidden\" name=\"" + this.var[i] + "\"" + (this.val!=null&&this.val.length>i?" value=\"" + this.val[i] + "\"":"") + "/>";
         }
-        aux += "</form>";
+//        aux += "</form>";
         return aux;
     }
     
@@ -58,7 +59,7 @@ public class Navegacion {
         for(int i = 0; i < var.length; i++){
             varVal += this.form + "." + this.var[i] + ".value=" + this.val[i] + ";";
         }
-        String aux = " onclick=\"javascript:" + varVal + this.form + ".submit();\"";
+        String aux = " onclick=\"" + varVal + this.form + ".submit();\"";
         return aux;
     }
     

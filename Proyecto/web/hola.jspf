@@ -1,2 +1,5 @@
-
-        <h1>Hello World!</h1>
+<h1>Hello World!</h1>
+<%
+    for (int i = 1; i < param.length; i++)
+        out.println("<b>Parametro de la Request: </b>" + param[i]);
+%>

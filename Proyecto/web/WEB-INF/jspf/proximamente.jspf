@@ -1,0 +1,8 @@
+<div class="construccion1">
+    <span class="superGrande">Proximamente</span>
+    <br/>
+    <span class="subtituloSuperGrande">En Construcción</span>
+</div>
+<div class="construccion2">
+    <img src="imagenes/en_construccion.png" height="480"/>
+</div>

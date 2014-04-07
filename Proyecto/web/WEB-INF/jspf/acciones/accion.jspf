@@ -1,0 +1,145 @@
+<%
+    String tabla = null;
+    String accion = null;
+    if (paramBD.length>1){
+        tabla = paramBD[1];
+//        out.println(tabla);
+    }
+    if (paramBD.length>2){
+        accion = paramBD[2];
+//        out.println(accion);
+    }
+    if ("jugador".equals(tabla)){
+%>    
+        <jsp:useBean id="jugador" scope="request" class="jdbc.JugadorJB"/>
+<%
+        if ("mostrar".equals(accion)){
+%>
+            <jsp:getProperty name="jugador" property="mostrar" />
+<%
+        } else if ("alta".equals(accion)){
+            if ("1".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="jugador" property="*" />
+                <jsp:getProperty name="jugador" property="insertar" />
+<%
+            }
+%>
+            <jsp:getProperty name="jugador" property="formAlta" />
+<%
+        } else if ("baja". equals(accion)){
+            if ("1".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="jugador" property="id" />
+                <jsp:getProperty name="jugador" property="borrar" />
+<%
+            }
+%>
+            <jsp:getProperty name="jugador" property="formBaja" />
+<%
+        } else if ("modificar". equals(accion)){
+            if ("1".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="jugador" property="id" />
+                <jsp:getProperty name="jugador" property="formModificar" />
+<%
+            } else if ("2".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="jugador" property="*" />
+                <jsp:getProperty name="jugador" property="actualizar" />
+<%    
+            }
+%>
+            <jsp:getProperty name="jugador" property="todosModificar" />
+<%
+        }
+    } if ("equipo".equals(tabla)){
+%>    
+        <jsp:useBean id="equipo" scope="request" class="jdbc.EquipoJB"/>
+<%
+        if ("mostrar".equals(accion)){
+%>
+            <jsp:getProperty name="equipo" property="mostrar" />
+<%
+        } else if ("alta".equals(accion)){
+            if ("1".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="equipo" property="*" />
+                <jsp:getProperty name="equipo" property="insertar" />
+<%
+            }
+%>
+            <jsp:getProperty name="equipo" property="formAlta" />
+<%
+        } else if ("baja". equals(accion)){
+            if ("1".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="equipo" property="id" />
+                <jsp:getProperty name="equipo" property="borrar" />
+<%
+            }
+%>
+            <jsp:getProperty name="equipo" property="formBaja" />
+<%
+        } else if ("modificar". equals(accion)){
+            if ("1".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="equipo" property="id" />
+                <jsp:getProperty name="equipo" property="formModificar" />
+<%
+            } else if ("2".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="equipo" property="*" />
+                <jsp:getProperty name="equipo" property="actualizar" />
+<%    
+            }
+%>
+            <jsp:getProperty name="equipo" property="todosModificar" />
+<%
+        }
+    }  if ("local".equals(tabla)){
+%>    
+        <jsp:useBean id="local" scope="request" class="jdbc.LocalJB"/>
+<%
+        if ("mostrar".equals(accion)){
+%>
+            <jsp:getProperty name="local" property="mostrar" />
+<%
+        } else if ("alta".equals(accion)){
+            if ("1".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="local" property="*" />
+                <jsp:getProperty name="local" property="insertar" />
+<%
+            }
+%>
+            <jsp:getProperty name="local" property="formAlta" />
+<%
+        } else if ("baja". equals(accion)){
+            if ("1".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="local" property="id" />
+                <jsp:getProperty name="local" property="borrar" />
+<%
+            }
+%>
+            <jsp:getProperty name="local" property="formBaja" />
+<%
+        } else if ("modificar". equals(accion)){
+            if ("1".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="local" property="id" />
+                <jsp:getProperty name="local" property="formModificar" />
+<%
+            } else if ("2".equals(request.getParameter("procesar"))){
+%>
+                <jsp:setProperty name="local" property="*" />
+                <jsp:getProperty name="local" property="actualizar" />
+<%    
+            }
+%>
+            <jsp:getProperty name="local" property="todosModificar" />
+<%
+        }
+    }
+%>

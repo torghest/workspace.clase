@@ -20,7 +20,10 @@ import jdbc.AccesoJDBC;
  * @author alumno
  */
 public class subMenu {
-    private AccesoJDBC jdbc;
+    public static final String separador1 = AccesoJDBC.separador1;
+    public static final String separador2 = AccesoJDBC.separador2;
+
+    private Connection con;
     private String[] optMenu;
     private String colorBase;
     private String colorSel;
@@ -31,7 +34,7 @@ public class subMenu {
     private String jspf;
 
     public subMenu() {
-        this.jdbc = new AccesoJDBC();
+        this.con = AccesoJDBC.getInstancia().getConexion();
         this.optMenu = this.getSubMenu();
         this.colorBase = properties.FONDO_MENU2;
         this.colorSel = properties.FONDO_MENU1;
@@ -66,6 +69,7 @@ public class subMenu {
     }
     
     public String getSelected() {
+        selected = (selected==null)?"1":selected;
         return selected;
     }
 
@@ -85,45 +89,44 @@ public class subMenu {
     }
     
     public String getJspf(){
-        this.jspf = cargarJspf();
-        return this.jspf;
+//        this.jspf = cargarJspf();
+        return cargarJspf();
     }
     
     private String[] getSubMenu(){
-        Connection con = this.jdbc.getConnection();
         String[] res = null;
-        if (this.selPadre != null){
-            try {
-                PreparedStatement ps = con.prepareStatement("SELECT nombre,id FROM submenu WHERE id_padre = ? ORDER BY id");
-                ps.setInt(1, Integer.valueOf(this.selPadre));
-                ResultSet rs = ps.executeQuery();
-                String aux = "";
-                while (rs.next()){
-                    aux += AccesoJDBC.separador1 + rs.getString("nombre") + AccesoJDBC.separador2 + rs.getString("id");
-                }
-                if (!aux.equals("")){
-                    aux = aux.substring(AccesoJDBC.separador1.length());
-                    res = aux.split(AccesoJDBC.separador1);
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+        if (this.selPadre == null){
+            this.selPadre = "1";
+        }
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT nombre,id FROM submenu WHERE id_padre = ? ORDER BY id");
+            ps.setInt(1, Integer.valueOf(this.selPadre));
+            ResultSet rs = ps.executeQuery();
+            String aux = "";
+            while (rs.next()){
+                aux += AccesoJDBC.separador1 + rs.getString("nombre") + AccesoJDBC.separador2 + rs.getString("id");
             }
+            if (!aux.equals("")){
+                aux = aux.substring(AccesoJDBC.separador1.length());
+                res = aux.split(AccesoJDBC.separador1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return res;
     }
     
     private String cargarJspf(){
-        Connection con = this.jdbc.getConnection();
         String res = "";
         String auxId = (this.selected==null)?"1":this.selected;
         if (this.selPadre != null){
             try {
-                PreparedStatement ps = con.prepareStatement("SELECT pagina FROM submenu WHERE id_padre = ? AND id = ? ORDER BY id");
+                PreparedStatement ps = con.prepareStatement("SELECT jspf FROM submenu WHERE id_padre = ? AND id = ? ORDER BY id");
                 ps.setInt(1, Integer.valueOf(this.selPadre));
                 ps.setInt(2, Integer.valueOf(auxId));
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()){
-                    res = rs.getString("pagina");
+                    res = rs.getString("jspf");
                 }
             } catch (SQLException ex) {
                 ex.printStackTrace();

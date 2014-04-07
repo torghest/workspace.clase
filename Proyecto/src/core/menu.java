@@ -20,6 +20,9 @@ import jdbc.AccesoJDBC;
  * @author alumno
  */
 public class menu {
+    public static final String separador1 = AccesoJDBC.separador1;
+    public static final String separador2 = AccesoJDBC.separador2;
+    
     private String[] optMenu;
     private String colorBase;
     private String colorSel;
@@ -28,12 +31,10 @@ public class menu {
     private String selected;
 
     public menu() {
-        AccesoJDBC jdbc = new AccesoJDBC();
-        this.optMenu = this.getMenu(jdbc.getConnection());
+        this.optMenu = this.getMenu(AccesoJDBC.getInstancia().getConexion());
         this.colorBase = properties.FONDO_MENU2;
         this.colorSel = properties.FONDO_MENU1;
-        this.varForm = new String[1];
-        this.varForm[0] = "menu";
+        this.varForm = new String[]{"menu","submenu"};
         this.nav = new Navegacion("menu",varForm);
     }
 
@@ -62,6 +63,7 @@ public class menu {
     }
     
     public String getSelected() {
+        selected = (selected==null)?"1":selected;
         return selected;
     }
 

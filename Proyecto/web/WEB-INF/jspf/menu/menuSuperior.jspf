@@ -1,29 +1,25 @@
 <jsp:useBean id="submenu" scope="request" class="core.subMenu"/>
 <jsp:setProperty name="submenu" property="selPadre" param="menu"/>
 <jsp:setProperty name="submenu" property="selected" param="submenu"/>
+    <div style="position: absolute; top: 2px; right: 18px; z-index: 100">
+        <ul align="left" style="cursor: default;">
 <%
-    if (submenu.getOptMenu()!=null){
+            submenu.getNav().setForm("form");
+            String sel = submenu.getSelected();
+            sel = (sel==null)?"1":sel;
+            for (String s : submenu.getOptMenu()){ 
+                String[] spl = s.split(submenu.separador2);
+                String[] val = {submenu.getSelPadre(),String.valueOf(spl[1])};
+                submenu.getNav().setVal(val);
+                String color = (spl[1].equals(sel))?"sel":"unsel";
+                String click = (!spl[1].equals(sel))?submenu.getNav().onClick():"";
 %>
-        <div style="position: absolute; top: 3px; right: 19px;">
-            <ul align="left" style="cursor: default;">
+                <li class="<%=color%>" id="superior"<%=click%>><%=spl[0]%></li>
 <%
-                submenu.getNav().setForm("subMenu");
-                for (String s : submenu.getOptMenu()){ 
-                    String[] spl = s.split(AccesoJDBC.separador2);
-                    String[] val = {submenu.getSelPadre(),String.valueOf(spl[1])};
-                    submenu.getNav().setVal(val);
-                    String sel = submenu.getSelected();
-                    sel = (sel==null)?"1":sel;
-                    String color = (spl[1].equals(sel))?submenu.getColorSel():submenu.getColorBase();
-                    String click = (!spl[1].equals(sel))?submenu.getNav().onClick():"";
+            }
+            String[] val = {submenu.getSelPadre(),submenu.getSelected()};
+            submenu.getNav().setVal(val);
 %>
-                    <li style="display: inline; background-color: <%=color%>; padding: 0px 5px;"<%=click%>><%=spl[0]%></li>
-<%
-                }
-%>
-            </ul>
-            <%=submenu.getNav().form()%>
-        </div>
-<%
-    }
-%>
+        </ul>
+        <%=submenu.getNav().form()%>
+    </div>
